@@ -1,0 +1,128 @@
+CPU
+
+  -Program counter
+    finds WHERE the programs are stored in memory
+    fetches a number from the specified location
+
+  -Instruction Decoder
+    translates the number that the counter fetched
+    decides WHAT process needs to take place
+
+  -Data bus
+    takes the instructions from the decoder
+    physical access to the memory from CPU
+    retrieves the data from the memory locations to be used
+
+  Arithmetic and Logic unit
+    instructions are executed and results are sent
+    back through the data bus to the memory
+
+
+  Memory
+    -Address
+      memory is made up of fixed size storage locations called bytes
+      typically 4 bytes in size
+
+***  The computer can't tell the difference between an address, an ASCII number
+***  or anything else until a special purpose register points to that Memory
+
+    -Byte
+      a number between 0-256
+      size of a single storage location or Address
+
+    -Registers
+      blocks of memory that live on the CPU
+      memory used for quick computation and things being worked on
+      the size of the register in bytes is the computer's word size
+      typically registers are 4 bytes in size
+
+Data Access Modes
+
+  -Immediate
+    data is embedded in the instruction like specifying the number 0 for a register
+
+  -Direct
+    the instruction contains the address to load data from in memory
+    and copies the data
+
+  -Indexed
+    has a starting address and a range based on a multiplier of bytes or words(4b) ie. address # 2000 with an index of 3 bytes (2000,2001,2002,2003)
+
+  -Indirect
+    the instructions contain a register that points to where the data should load from and see where that points to. offset in register, pointer constant
+
+  -Base-pointer
+    similar to indirect but it includes a number called the offset to add the register value before using it for lookup. pointer in register, offset is constant
+
+
+  Chapter 2 Review
+  Describe fetch execute cycle
+    The CPU reads instructions from memory one at a time
+    The program counter tells the CPU where to get the next instruction from
+    in memory and passes it to the Decoder which figures out what the data in memory means and what to do with it. Then the Data Bus grabs the data from those blocks of memory specified, sends them to the math/logic unit to be executed and returns the results back to memory via the data bus.
+
+
+  What is a register? How would computation be more difficult without them?
+    A register is a memory block onboard the CPU that allows for special functions and current work to be stored and retrieved quickly. Without them, processes would be much slower limited by the speed of the Data bus.
+
+  How are numbers > 255 represented?
+    By blocks of bytes grouped in 4.
+
+  How big are the registers on machines we'll be using?
+    4 bytes
+
+  How does a computer know how to interpret a given byte or set of bytes?
+    Through instructions given by a special register called the instruction pointer which loads areas of memory as instructions vs other data.
+
+  What are the addressing modes and what are they used for?
+    Immediate, Direct, Indirect, Indexed, and Base-pointer used for how data is retrieved from memory and how the data is used
+
+  What does the instruction pointer do?
+    the instuction pointer tells the computer where to retrieve the data in memory.
+
+
+- Data directives
+
+  .byte
+    take up one storage location (1byte, 8 bits) limited to numbers 0-255
+
+  .int
+    take up two storage locations (2 bytes) limited 0-65535
+
+  .long
+    take up four storage locations (4b) limited 0-4294967295
+
+  .ascii
+    holds letters and characters. 1/byte
+
+- Writing indexed addressing modes
+  movl BEGINNINGADDRESS(,%INDEXREGISTER,WORDSIZE)
+  ie.: movl data_items(,%edi,4)
+  # in this case 'data_items' is the address and the data stored
+  # in %edi is 4 bytes long.
+
+the general form of memory address references is
+ADDRESS_OR_OFFSET(%BASE_OR_OFFSET,%INDEX,MULTIPLIER)
+
+to calculate the final address:
+FINAL_ADDRESS=ADDRESS_OR_OFFSET + %BASE_OR_OFFSET + MULTIPLIER * %INDEX
+
+0) List the general-purpose registers.
+
+General-purpose registers (8):
+
+AX – accumulator register, Used in arithmetic operations
+
+CX – Counter register, Used in shift/rotate instructions and loops
+
+DX – Data register, Used in arithmetic operations and I/O operations
+
+BX – Base register, Used as a pointer to data
+
+SP – Stack Pointer register, Pointer to the top of the stack
+
+BP – Stack Base Pointer register, Points to the base of the stack
+
+SI – Source Index register, Pointer to a source in stream operations
+
+DI – Destination Index register, Pointer to a destination in stream operations
