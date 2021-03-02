@@ -1,7 +1,7 @@
 #include<stdio.h>
 #define OUT 0                   //Defining variables
 #define IN 1
-#define HI 20
+#define HI 15
 int c, i, cnt, state, ovrflo;
 int wrdlng[HI];
 
@@ -28,13 +28,14 @@ state = OUT;
           }
           cnt = 0;
     }
-    else if (state == OUT) {  //beginning of new word
+    else  //user types in characters that aren't blank
+      if (state == OUT) {  //beginning of new word
         cnt = 1;    //reset count
         state = IN;
-    }
-    else{
+      }
+      else{
           ++cnt;
-    }
+      }
           state = IN;
 
 
