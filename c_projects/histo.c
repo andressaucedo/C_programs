@@ -28,7 +28,7 @@ state = OUT;
               ++ovrflo;
             }
           }
-          cnt = 0;
+         cnt = 0;
     }
     else  //user types in characters that aren't blank
       if (state == OUT) {  //beginning of new word
@@ -38,7 +38,7 @@ state = OUT;
       else{
           ++cnt;
       }
-          state = IN;
+      //    state = IN;
 
 
   }

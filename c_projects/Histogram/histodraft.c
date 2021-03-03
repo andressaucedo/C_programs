@@ -2,9 +2,10 @@
 #define OUT 0                   //Defining variables
 #define IN 1
 #define HI 15
-int c, i, cnt, state, ovrflo;
 
+int c, i, cnt, state, ovrflo;
 int wrdlng[HI];
+
 int main()
 {
 printf("This program tallies the number of characters in words from input:\n");
@@ -18,29 +19,28 @@ state = OUT;
 
   while ((c = getchar()) != EOF) {
 
-    if (c != ' ' || c != '\t' || c != '\n') { //if input is not blank
+    if ((c != '\n') && (c != '\t') && (c != ' ')) { //if input is not blank
+
         if (state == OUT){  //beginning of new word
           cnt = 1;
           state = IN;
-        }else if (state == IN){ //in middle of a word
-            if (cnt < HI) {
+        }else{ //in middle of a word
             ++cnt;
-            }
-            if (cnt >= HI) {
-            ++ovrflo;
-            }
         }
-
-    }else if (c == ' ' || c == '\t' || c == '\n') { //if input is blank
-
-          if (state == IN) {    //end of word
+      //printf("%d", cnt);
+    }else  //if (c == ' ' || c == '\t' || c == '\n') { //if input is blank
+    {
+      //printf("%d", cnt);
+      state = OUT;
+        //  if (cnt > 0){
+            if( cnt < HI) {    //end of word
             ++wrdlng[cnt];    //set array variable
-            state = OUT;
-            cnt = 0;
-          }
-          else {
-            cnt = 0;
-          }
+           }
+            else {
+              ++ovrflo;
+            }
+          //}
+       cnt = 0;
     }
 
   }
