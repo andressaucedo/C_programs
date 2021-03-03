@@ -18,23 +18,25 @@ state = OUT;
 
   while ((c = getchar()) != EOF) {
 
-    if (c != ' ' || c != '\t' || c != '\n') {
+    if (c != ' ' || c != '\t' || c != '\n') { //if input is not blank
         if (state == OUT){  //beginning of new word
           cnt = 1;
           state = IN;
         }else if (state == IN){ //in middle of a word
+            if (cnt < HI) {
+            ++cnt;
+            }
             if (cnt >= HI) {
             ++ovrflo;
-            }if (cnt < HI) {
-            ++cnt;
             }
         }
 
-    }else if (c == ' ' || c == '\t' || c == '\n') {
+    }else if (c == ' ' || c == '\t' || c == '\n') { //if input is blank
 
           if (state == IN) {    //end of word
             ++wrdlng[cnt];    //set array variable
             state = OUT;
+            cnt = 0;
           }
           else {
             cnt = 0;
