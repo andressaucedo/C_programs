@@ -1,27 +1,29 @@
 #include<stdio.h>
 
-int power(int m, int n);
+int power(int,int);
 
-
-//this is a sample program that calculates integers
-//to the power of 10
-main() {
-  int i;
-  int bs;
-  bs = 0;
-  printf("Please enter a base number:\n");
-  bs = getchar();
-  for (i= 1; i < 10; ++i)
-    printf ("%d %d\n", i, power(bs,i));
-
-  return 0;
-
+int main()
+{
+  int i, b, e;
+  b=e=0;
+printf("enter base: \n");
+scanf("%3i", &b);
+printf("enter exponent: \n");
+scanf("%3i", &e);
+putchar('\n');
+  for (i = 1; i <= e; i++) {
+    printf("%d\n", power(b,i));
+  }
+return 0;
 }
-int power(int base, int n){
-  int i, p;
 
-  p = 1;
-  for (i = 1; i <= n; ++i)
-    p = p * base;
-  return p;
+//power: raise base to the n-th power
+int power (int base, int n)
+{
+int i, answr;
+answr=1;
+  for (i=1; i<=n ; ++i){
+    answr = answr * base;
+  }
+return answr;
 }

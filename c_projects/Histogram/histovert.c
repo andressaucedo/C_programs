@@ -10,7 +10,7 @@ int wrdtotl;  //word count total
 
 int main()
 {
-printf("This program counts and graphs the number of characters in words from input (Press ctrl-d to exit input and output results)\n");
+printf("This program counts and graphs the number of characters in words from input\n");
 printf("The maximum word length is set at %d characters: \n",(HI - 1));
 
 c = i = cnt = ovrflo = 0;             //Setting variables to 0
