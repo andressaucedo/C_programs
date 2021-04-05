@@ -1,50 +1,28 @@
 #include<stdio.h>
-#define MAX 1000
-int getl(char line[]);
-void delete(char line1[], char line2[]);
+#define TAB 5
 
 int main()
 {
-char input[MAX];
-char output[MAX];
+  char replacer = 'x'; //replacement char for tab
+  int pos = 1; //array position
+  int c, tc;
 
-  while(getl(input) > 0){
-      delete(input,output);
-      printf("%s\n", output);
-  }
-
-return 0;
-}
-
-
-//function get a line from input and end it after a newline
-int getl(char line[]){
-int i, c;
-
-  for(i=0; (c=getchar()) != EOF && c != '\n'; i++){
-    line[i] = c;
-  }if (c = '\n'){
-    line[i] = '\0';
-  }
-
-return i;
-}
-//function to delete blanks and tabs
-void delete(char line1[], char line2[]){
-int i=0; int x=0;
-
-  while(line1[i] != '\n'){
-    if(line1[i] != '\t' && line1[i] != ' '){
-      line2[x] = line1[i];
-      ++i; ++x;
+while((c=getchar()) != EOF){
+    if (c == '\t'){
+      tc = TAB - pos % TAB;
+      while(tc > 0){
+        putchar(replacer);
+        --tc;
+        ++pos;
+      }
+    }else if (c == '\n'){
+      putchar(c);
+        pos = 1;
     }else{
-      ++i;
+      putchar(c);
+      ++pos;
     }
-  }
-  if(line1[i] == '\n'){
-    line2[x] = '\n';
-    ++i; ++x;
-    line2[x] = line1[i] = '\0';
-  }
 
+  }
+  return 0;
 }

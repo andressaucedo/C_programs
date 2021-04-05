@@ -1,19 +1,20 @@
 #include<stdio.h>
+float cuber(float value);
 
-int main() {
-char ASCII;
-int integer;
-printf("Please enter a character: ");
-scanf("%c", &ASCII);
-printf("%i\n", ASCII);
+int main()
+{
+   float value;
 
-printf("Please enter an integer between 0-127: ");
-scanf("%i",&integer);
-printf("%c\n", integer);
+   printf("Enter a value: ");
+   scanf("%f",&value);
+   printf("%.3f cubed is %.3lf\n",value,cuber(value));
 
-char mathz = 'A' + '\t';
-printf("A(65) + \\t(11) = %c(%d)\n", mathz, mathz);
 
-  return 0;
+return 0;
+}
 
+float cuber(float value)
+{
+   value = value * value * value;
+   return value;
 }
