@@ -19,7 +19,7 @@ int recur(int num)
 	return 1;
 
 	else{
-		ans = 2 + recur(num/2);	
+		ans = 2 + recur(num/2);
 		printf("%d\n",ans);
 		return ans;
 	}

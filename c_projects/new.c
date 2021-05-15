@@ -1,35 +1,49 @@
-//raceconvert.c - This program takes a time for a metric race and converts
-//the time and rate for it's equivalent in a miles race
 #include<stdio.h>
-#include<string.h>
-#define SECMIN 60   //seconds per minute
-#define SECHR 3600 //seconds per hour
-#define MIKM 0.612137   //miles per km
+#define ROW 4
+#define COL 5
+#define RANGE 3
+#define INDEX 3
+
+
+void array_notation(int a[][COL],int b[][COL], int rows, int cols);
+void pointer_notation(int * a,int * b,int element);
 
 int main(void)
 {
-   float distance_km,distance_mi,mph,kph;
-   float pace_mi_min,pace_mi_sec;
-   int minutes, seconds;
+   int foo[ROW][COL] = {
+      {2,4,2,1,5},
+      {3,32,5,2,5},
+      {3,5,32,5,6},
+      {6,7,4,2,6}
+   };
+   int one[RANGE];
+   pointer_notation(*foo + (INDEX-1),one,RANGE);
 
-   printf("This program converts your time for a metric race\n"
-   "to a time for running a mile and to your average\n"
-   "speed in miles per hour.\n\n"
-   "Please enter, in kilometers, the distance run.\n");
-   scanf("%f", &distance_km);
-   printf("Next, enter the time in minutes and seconds.(example: 25:34)\n");
-   scanf("%2d:%2d",&minutes,&seconds);
+   for(int i=0; i < RANGE; i++)
+      printf("%d ", one[i]);
+   printf("\n");
 
-   distance_mi = distance_km * MIKM;
-   seconds += (minutes * 60);
-   kph = (SECHR / (float)seconds) * distance_km;
-   mph = (SECHR / (float)seconds) * (distance_km * MIKM);
-   pace_mi_min = ((float)seconds/distance_mi)/SECMIN;
-   pace_mi_sec = ((float)pace_mi_min - (int)pace_mi_min) * SECMIN;
+/*
+   int bar[ROW][COL];
+   array_notation(foo,bar,ROW,COL);
+   for(int i= 0; i < ROW; i++){
+      for(int j=0; j < COL; j++)
+      printf("%d ", bar[i][j]);
+   printf("\n");
+   }
+*/
+}
+void pointer_notation(int * a,int * b,int element)
+{
 
-   printf("\n%2.2fkm/%2.2fmi total distance\n",distance_km, distance_mi);
-   printf("%2.2fkph/%2.2fmph\n",kph,mph);
-   printf("%d:%02d mile pace\n",(int)pace_mi_min, (int)pace_mi_sec);
+   for(int i = 0; i < element ;i++)
+      *(b + i) = *(a + i);
 
-   return 0;
+}
+
+void array_notation(int a[][COL],int b[][COL], int rows, int cols)
+{
+   for(int i=0;i<rows;i++)
+      for(int j=0;j<cols;j++)
+         b[i][j] = a[i][j];
 }
