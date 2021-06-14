@@ -15,38 +15,47 @@ void wordlongsort(char strings[][MAX], int count);
 
 
 int main(void) {
+  char arraycopy[NUM1][MAX];
   char array[NUM1][MAX];
   int count,menuchoice;
-
+  int i;
   count = getinput(array);
   printf("%d\n", count);
 
-  menuchoice = menu();
-  switch(menuchoice)
-  {
-    case 1:
-    printlist(array,count);
-    break;
+  //copy input array to modifiable copy
+  for(i=0; i < count; i++)
+    strcpy(arraycopy[i],array[i]);
 
-    case 2:
-    alphasort(array,count);
-    putchar('\n');
-    printlist(array,count);
-    break;
+  do{
+    menuchoice = menu();
+    switch(menuchoice)
+    {
+      case 1:
+      printlist(array,count);
+      break;
 
-    case 3:
-    strlongsort(array,count);
-    printlist(array,count);
-    break;
+      case 2:
+      alphasort(arraycopy,count);
+      putchar('\n');
+      printlist(arraycopy,count);
+      break;
 
-    case 4:
-    wordlongsort(array,count);
-    break;
+      case 3:
+      strlongsort(arraycopy,count);
+      printlist(arraycopy,count);
+      break;
 
-    case 5:
-    break;
+      case 4:
+      wordlongsort(arraycopy,count);
+      printlist(arraycopy,count);
+      break;
 
-  }
+      case 5:
+      break;
+
+    }
+  }while(menuchoice != 5 || isdigit(menuchoice) != 0);
+
 return 0;
 }
 
@@ -56,7 +65,7 @@ int getinput(char strings[][MAX])
   int i=0;
   int count = 0;
   char ch;
-  puts("Enter 10 strings.");
+  puts("Enter 10 phrases.");
   while(i < NUM1 && fgets(strings[i], MAX, stdin) != NULL && strcmp(strings[i], "\n\0") != 0){
     count++;
     i++;
@@ -147,26 +156,35 @@ void strlongsort(char strings[][MAX], int count)
 void wordlongsort(char strings[][MAX], int count)
 {
   int wordlength[NUM1];
-  int order[NUM1];
-  int *choice;
+  char tempstr[MAX];
+  char stringscopy[NUM1][MAX];
+  int tempint;
   int i,j;
-  int charcount;
   //this loop finds the length of the words and stores them in an
   //array named wordlength[]
   for(i=0; strings[i]!= NULL && i < count; i++)
     for(j=0; strings[i][j] != '\0' && strings[i][j] != ' ' && strings[i][j] != '\n' && strings[i][j] != '\t'; j++)
       wordlength[i] = j+1;
-//! something wrong with this section
-  for(i=0; i < count-1; i++){
-    choice = &wordlength[i];
-    for(j=i+1; j < count; j++)
-      if(*choice > wordlength[j])
-      choice = &wordlength[j];
-    order[i] = *choice;
-  }
-  for(i=0;i<count;i++)
-    printf("%d\n", order[i]);
+//!!! something wrong with this section
+  for(i=0; i < (count - 1); i++)
+    for(j=(i+1); j < count; j++){
+      if(wordlength[i] > wordlength[j]){
+        tempint = wordlength[i];
+        wordlength[i] = wordlength[j];
+        wordlength[j] = tempint;
+        //worldength[] keeps count and any changes we do to it
+        //must also be done to the strings[] array
+        strcpy(tempstr,strings[i]);
+        strcpy(strings[i],strings[j]);
+        strcpy(strings[j], tempstr);
+      }
+    }
+//print arrays
   for(i=0;i<count;i++)
     printf("%d\n", wordlength[i]);
+  putchar('\n');
 
+/*  for(i=0;i<count;i++)
+    fputs(strings[i],stdout);
+*/
 }
