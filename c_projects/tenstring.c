@@ -70,7 +70,7 @@ int getinput(char strings[][MAX])
   int i=0;
   int count = 0;
   char ch;
-  puts("Enter 10 phrases.");
+  printf("Enter up to %d phrases \nPress Enter twice when done with input:\n", NUM1);
   while(i < NUM1 && fgets(strings[i], MAX, stdin) != NULL && strcmp(strings[i], "\n\0") != 0){
     count++;
     i++;
