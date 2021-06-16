@@ -28,29 +28,34 @@ int main(void) {
 
   do{
     menuchoice = menu();
+    putchar('\n');
     switch(menuchoice)
     {
       case 1:
       printlist(array,count);
+      putchar('\n');
       break;
 
       case 2:
       alphasort(arraycopy,count);
-      putchar('\n');
       printlist(arraycopy,count);
+      putchar('\n');
       break;
 
       case 3:
       strlongsort(arraycopy,count);
       printlist(arraycopy,count);
+      putchar('\n');
       break;
 
       case 4:
       wordlongsort(arraycopy,count);
       printlist(arraycopy,count);
+      putchar('\n');
       break;
 
       case 5:
+      puts("Goodbye.");
       break;
 
     }
@@ -183,8 +188,4 @@ void wordlongsort(char strings[][MAX], int count)
   for(i=0;i<count;i++)
     printf("%d\n", wordlength[i]);
   putchar('\n');
-
-/*  for(i=0;i<count;i++)
-    fputs(strings[i],stdout);
-*/
 }
