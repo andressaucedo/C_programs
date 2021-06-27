@@ -1,5 +1,6 @@
 /* wordstats.c - Takes input from either stdin or a file and tallies
 /* different character types and spaces and outputs them to stdout.*/
+
 #include<stdio.h>
 #include<string.h>
 #include<ctype.h>
