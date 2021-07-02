@@ -8,7 +8,7 @@ void append(FILE *source, FILE *dest);
 
 int main(int argc, char const *argv[]) {
   FILE *fa, *fr;
-  int file;
+  int filenum;
 
   if(argc < 3)
   {
@@ -28,12 +28,13 @@ int main(int argc, char const *argv[]) {
     exit(3);
   }
 
-  for(file = 1; file < argc -1; file++)
+  for(filenum = 1; filenum < argc -1; filenum++)
   {
-      if (strcmp(argv[argc-1], argv[file]) == 0)
+      //produces error if one of the source file is same as destination
+      if (strcmp(argv[argc-1], argv[filenum]) == 0)
         fputs("Cant append file to itself\n",stderr);
-      else if( (fr = fopen(argv[file], "r")) == NULL)
-        fprintf(stderr, "Can't open %s\n", argv[file]);
+      else if( (fr = fopen(argv[filenum], "r")) == NULL)
+        fprintf(stderr, "Can't open %s\n", argv[filenum]);
       else
         {
             if (setvbuf(fr,NULL,_IOFBF,BUFSIZE) != 0)
@@ -43,7 +44,7 @@ int main(int argc, char const *argv[]) {
             }
             append(fr,fa);
             if(ferror(fr) !=0)
-              fprintf(stderr, "Error in reading %s\n",argv[file]);
+              fprintf(stderr, "Error in reading %s\n",argv[filenum]);
             if(ferror(fa) != 0)
               fprintf(stderr, "Error in writing %s\n",argv[argc-1]);
             fclose(fr);
