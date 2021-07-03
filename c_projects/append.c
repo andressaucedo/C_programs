@@ -33,6 +33,7 @@ int main(int argc, char const *argv[]) {
       //produces error if one of the source file is same as destination
       if (strcmp(argv[argc-1], argv[filenum]) == 0)
         fputs("Cant append file to itself\n",stderr);
+      //makes sure fr is not a NULL pointer/incorrect file name
       else if( (fr = fopen(argv[filenum], "r")) == NULL)
         fprintf(stderr, "Can't open %s\n", argv[filenum]);
       else
