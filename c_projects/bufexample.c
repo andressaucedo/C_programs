@@ -14,7 +14,8 @@ int main(int argc, char const *argv[]) {
   int i;
   char mybuf[BUFSIZE];
   fprintf(stdout,"Let's get buff(ered)!\n");
-  fprintf(stdout,"It's going to make us wait 5 seconds\nand then flush the buffer.\n");
+  fprintf(stdout,"It's going to make us wait 5 seconds\n"
+  "and then flush the buffer.\n");
   /*The commented out version of setvbuf() below automatically makes a buffer
   using the NULL pointer argument and makes it sizeof BUFSIZE*/
   //setvbuf(stdout,NULL,_IOFBF,BUFSIZE);
