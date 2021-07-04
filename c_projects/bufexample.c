@@ -8,11 +8,16 @@ and flushing the buffer.*/
 #include<stdio.h>
 #include<stdlib.h>
 #include<unistd.h>
+#include<string.h>
+
 #define BUFSIZE 1024
 
 int main(int argc, char const *argv[]) {
   int i;
+  FILE *fp;
   char mybuf[BUFSIZE];
+  char string[BUFSIZE];
+  fp = fopen("tester.txt","r");
   fprintf(stdout,"Let's get buff(ered)!\n");
   fprintf(stdout,"It's going to make us wait 5 seconds\n"
   "and then flush the buffer.\n");
@@ -26,13 +31,15 @@ int main(int argc, char const *argv[]) {
   //setvbuf(stdout,NULL,_IOLBF,BUFSIZE);
 
   //The current version being used makes use of our predefined buffer array
-  setvbuf(stdout,mybuf,_IOFBF,sizeof mybuf);
+  setvbuf(fp,mybuf,_IOFBF,sizeof mybuf);
   for(i=1; i < 6;i++){
     sleep(1);
     fprintf(stdout,"%d\n",i);
     fflush(stdout);
   }
   fprintf(stdout,"Hey, it works!\n");
+  fgets(string,fp);
+  fputs(string,stdout);
   fflush(stdout);
 
   return 0;
