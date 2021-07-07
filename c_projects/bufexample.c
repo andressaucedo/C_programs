@@ -38,9 +38,15 @@ int main(int argc, char const *argv[]) {
     fflush(stdout);
   }
   fprintf(stdout,"Hey, it works!\n");
-  fgets(string,fp);
-  fputs(string,stdout);
-  fflush(stdout);
 
+  while(1){
+    fgets(string,BUFSIZE,fp);
+    fputs(string,stdout);
+    if(feof(fp))
+      break;
+  }
+
+fflush(NULL);
+fclose(fp);
   return 0;
 }
