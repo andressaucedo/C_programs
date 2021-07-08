@@ -26,7 +26,7 @@ int main(int argc, char const *argv[]) {
   }
   //**end error checking section**
 
-  setvbuf(fp, linebuf,_IOLBF,sizeof(linebuf));
+  setvbuf(fp, linebuf,_IONBF,sizeof(linebuf));
   while(fgets(linebuf,BUFSIZE,fp) != NULL){
     for(i=0; linebuf[i] != '\n'; i++){
       if(linebuf[i] == ch){
