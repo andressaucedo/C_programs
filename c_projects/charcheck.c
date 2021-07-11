@@ -1,3 +1,4 @@
+//charcheck.c - Displays all lines from file containing specified character.
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
