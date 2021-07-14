@@ -1,4 +1,10 @@
-/*lastline.c - prints last lines of files */
+/*****************************************************************************
+* lastline.c - Takes at least one argument in the form of a readable file    *
+* and returns the last few lines of the file to stdout. Optionally, will take* * a final argument in the form of an int to specify the number of lines to   * * return.                                                                    *
+*                                                                            *
+* example: ./lastline file1.txt file2.txt -6                                 *
+******************************************************************************/
+
 #include<stdio.h>
 #include<stdlib.h>
 #include<ctype.h>
@@ -22,7 +28,6 @@ int main(int argc, char *argv[])
   // last argument is an option
   if( (lines = strtol(argv[argc -1],&foo,10)) != 0){
     i=argc-1;
-    fprintf(stdout,"%ld\n",lines);
     if(lines < 0)
       lines *= -1;
   }else{
@@ -49,7 +54,7 @@ void show_end(char *name, long lines, FILE *file)
     long newlines = 0;
     long count, start, last;
 
-    printf("%s:\n", name);
+    printf("\n%s:\n", name);
     start = ftell(file);
     fseek(file, 0L, SEEK_END); //go to end of file
     last = ftell(file);
