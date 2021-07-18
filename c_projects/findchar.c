@@ -15,7 +15,7 @@ int search(char object, FILE *subject);
 
 int main(int argc, char const *argv[])
 {
-  int i;
+  int i,count;
   FILE *fp;
 
     //BEGIN error check for command line call
@@ -27,9 +27,10 @@ int main(int argc, char const *argv[])
     printf("%c\n",argv[1][0]);
     for(i=2; i < argc; i++){
         fp = fopen(argv[i],"r");
-      fprintf(stdout,"%s: %d\n",argv[i],search(argv[1][0],fp));
+        count = search(argv[1][0],fp);
+      fprintf(stdout,"%s: %d\n",argv[i],count);
     }
-
+fclose(fp);
 return 0;
 }
 
@@ -39,8 +40,7 @@ int search(char object, FILE *subject)
     int count;
     char ch;
 
-    while( !feof(subject)){
-      ch=fgetc(subject);
+    while( ch=getc(subject) != EOF){
       if( ch == object)
         count++;
     }
