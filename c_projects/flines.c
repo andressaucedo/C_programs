@@ -30,7 +30,7 @@ int i;
   while(1){
     if(feof(file[0]) && feof(file[1]))
       break;
-    /* decomment and  replace this section for lineprint calls to use charprint
+    /* decomment this section to use charprint
     charprint(file[0]);
     charprint(file[1]);
     putchar('\n');

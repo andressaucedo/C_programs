@@ -8,6 +8,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<ctype.h>
+#define BUF 1024
 
 void show_end(char *name,long lines, FILE *file);
 
@@ -53,11 +54,14 @@ void show_end(char *name, long lines, FILE *file)
     int ch;
     long newlines = 0;
     long count, start, last;
+    char buffer[BUF];
 
     printf("\n%s:\n", name);
-    start = ftell(file);
-    fseek(file, 0L, SEEK_END); //go to end of file
-    last = ftell(file);
+    start = ftell(file); //default start is at beginning of file
+    fseek(file, 0L, SEEK_END);
+    last = ftell(file); //last is the end of the file
+
+    //count backwards and set a new start
     for(count = 1L; count <= last; count++)
     {
       fseek(file, (-1*count), SEEK_END); //go backwards
@@ -71,7 +75,13 @@ void show_end(char *name, long lines, FILE *file)
           break;
       }
     }
+
     fseek(file,start, SEEK_SET);
-    while ((ch = getc(file)) != EOF)
-      putchar(ch);
+    setvbuf(file,buffer,_IOFBF,BUF);
+    while(1){
+      if(feof(file))
+        break;
+      fread(buffer,sizeof(char),1,file);
+      fwrite(buffer,sizeof(char),1,stdout);
+    }
 }
