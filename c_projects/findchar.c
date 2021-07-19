@@ -24,23 +24,33 @@ int main(int argc, char const *argv[])
          exit(1);
       }
     //END error check for command line call
-    printf("%c\n",argv[1][0]);
-    for(i=2; i < argc; i++){
-        fp = fopen(argv[i],"r");
-        count = search(argv[1][0],fp);
-      fprintf(stdout,"%s: %d\n",argv[i],count);
+
+    //if no files are specified
+    if(argc == 2){
+      puts("No input file, please enter input to search (Ctrl+D to end):");
+      count = search(argv[1][0],stdin);
+      fprintf(stdout,"%s: %d\n","from input",count);
     }
-fclose(fp);
+
+    //otherwise use files for input
+    else{
+      for(i=2; i < argc; i++){
+          fp = fopen(argv[i],"r");
+          count = search(argv[1][0],fp);
+          fprintf(stdout,"%s: %d\n",argv[i],count);
+      }
+      fclose(fp);
+    }
 return 0;
 }
 
 int search(char object, FILE *subject)
 {
     long start,end;
-    int count;
+    int count = 0;
     char ch;
 
-    while( ch=getc(subject) != EOF){
+    while((ch=getc(subject)) != EOF){
       if( ch == object)
         count++;
     }
