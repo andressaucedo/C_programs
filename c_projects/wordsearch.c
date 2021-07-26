@@ -1,4 +1,4 @@
-
+/* wordsearch.c - program that takes as command line arguments a string and a  filename for a file to search. The program returns the number of times the word appears in the file to stdout */
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
@@ -26,8 +26,8 @@ int main(int argc, char const *argv[])
   }
 
   wordcount = cmpline(word,file);
-  fprintf(stdout, "The word %s occurs %d times in file %s\n",word,wordcount,filename);
-
+  fprintf(stdout, "The word \"%s\" occurs %d times in file %s\n",word,wordcount,filename);
+  fclose(file);
   return 0;
 }
 
@@ -35,20 +35,22 @@ int main(int argc, char const *argv[])
 int cmpline(char *word, FILE *file)
 {
   int count=0;
-  int i = 0;
+  int length;
+  long i;
   char buffer[BUFSIZE];
-  long pos;
   long end;
-  setvbuf(file,buffer,_IONBF,sizeof(buffer));
-  fseek(file,0,SEEK_SET);
-  pos = ftell(file);
+
+  //get length of word +1 for '\0'
+  length = strlen(word) + 1;
+
+  setvbuf(file,buffer,_IONBF,length);
   fseek(file,0,SEEK_END);
   end = ftell(file);
   rewind(file);
 
-  while(i=0; i < end;i++){
+  for(i = 0; i < end; i++){
     fseek(file,i,SEEK_SET);
-    fgets(buffer,sizeof(word),file);
+    fgets(buffer,length,file);
     if(strcmp(word,buffer) == 0){
       count++;
     }
