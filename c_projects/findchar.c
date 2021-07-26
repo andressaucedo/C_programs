@@ -44,6 +44,8 @@ int main(int argc, char const *argv[])
 return 0;
 }
 
+//search() function for iterating through a file and counting the occurence
+//of the character object. Returns the count as int.
 int search(char object, FILE *subject)
 {
     long start,end;
