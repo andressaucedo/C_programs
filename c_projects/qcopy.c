@@ -1,5 +1,5 @@
 /*****************************************************************************
- * myfilecopy.c - This program takes two arguments from the command line, the*
+ * qcopy.c - This program takes two arguments from the command line, the*
  * first is an existing file to be copied and the second is a file copy to be*
  * written out in binary mode or standard i/o.                               *
  *****************************************************************************/

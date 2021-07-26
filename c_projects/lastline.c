@@ -64,7 +64,7 @@ void show_end(char *name, long lines, FILE *file)
     //count backwards and set a new start
     for(count = 1L; count <= last; count++)
     {
-      fseek(file, (-1*count), SEEK_END); //go backwards
+      fseek(file, (-1 * count), SEEK_END); //go backwards
       ch = getc(file);
       if(ch == '\n')
         newlines++; //count number of newlines

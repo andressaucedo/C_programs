@@ -17,7 +17,7 @@ int questions(FILE *log);
 int main(int argc, char const *argv[]) {
   FILE *log;
   char date[MAX];
-  log = fopen("stepten.txt","a+");
+  log = fopen("stepten.log","a+");
 
   greeting();
   getdate(log,date);
