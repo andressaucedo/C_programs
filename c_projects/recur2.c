@@ -10,11 +10,11 @@ return 0;
 int recurser(int i)
 {
 
-  printf("%d", i);
+  printf("%d ", i);
   if(i<10){
     recurser(i+1);
   }
-  printf("%d", i);
+  printf("\n%d ", i);
 
 return 0;
 }
