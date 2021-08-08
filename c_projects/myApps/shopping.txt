@@ -1,0 +1,30 @@
+Sun Aug  8 00:16:08 2021
+10.00 - cat & jack
+
+3.70 - underwear
+
+16.49 - lockbox
+
+4.99 - glade
+
+1.99 - glade
+
+3.99 - card
+
+2.99 - card
+
+5.50 - wrapping paper
+
+4.99 - slime
+
+5.99 - notebook
+
+7.99 - notebook
+
+3.49 - emory
+
+12.00 - jockeys
+
+60.00 - groceries
+
+Item total: 144.11

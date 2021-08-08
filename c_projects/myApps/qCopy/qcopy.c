@@ -22,8 +22,9 @@ int main(int argc, char const *argv[])
   //BEGIN error checking block for command line call.
   if(argc != 3 && argc != 4){
     fprintf(stderr,
-        "usage: myfilecopy sourcefile copyfile [-t (standard i/o mode)]\n"
-        "files are copied in binary mode by default.");
+        "qcopy -- copies one file to a new file in either\n"
+        "         text mode or binary mode by default.\n\n"
+        "USAGE: %s sourcefile copyfile [-t TEXT MODE]\n\n",argv[0]);
     exit(1);
   }
   if(isalnum(*argv[2]) == 0){

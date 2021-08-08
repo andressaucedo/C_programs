@@ -56,10 +56,10 @@ int main(int argc, char const *argv[])
     for(i = 0, sum = 0; (list[i].price = getprice()) != '\0' && i < MAX;i++){
         getcomment(list[i].label);
         sum += list[i].price;
-        fprintf(listfile, "%.2f - %s\n", list[i].price,list[i].label);
+        fprintf(listfile, "%.2f + %s", list[i].price,list[i].label);
     }
     fprintf(stdout,"Item total: %.2f\n",sum);
-    fprintf(listfile,"Item total: %.2f\n",sum);
+    fprintf(listfile,"\nItem total: %.2f\n\n",sum);
 
     return 0;
 }

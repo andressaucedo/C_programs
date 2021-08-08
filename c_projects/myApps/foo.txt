@@ -1,0 +1,12 @@
+Sun Aug  8 00:28:51 2021
+23.00 - 
+44.00 - 
+69.99 - 
+
+Item total: 136.99
+Sun Aug  8 00:31:39 2021
+56.63 + ham
+23.34 + cheese
+8.97 + yogurt cups
+
+Item total: 88.94
