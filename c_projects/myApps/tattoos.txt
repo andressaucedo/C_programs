@@ -1,0 +1,11 @@
+Tue Aug 10 19:59:24 2021
+180.00 + gabby
+160.00 + peaches
+120.00 + lola
+200.00 + joann
+160.00 + ryan
+140.00 + Oleksandr
+200.00 + nancy
+
+Item total: 1160.00
+
