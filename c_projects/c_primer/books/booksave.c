@@ -7,7 +7,7 @@
 
 int main(void)
 {
-  struct book biblio[MAXBKS]; //arrrya of structs
+  struct book biblio[MAXBKS]; //array of structs
   int count = 0;
   int index, filecount;
   int size = sizeof(struct book);
@@ -28,7 +28,7 @@ int main(void)
     if(count == 0){
       fputs("Current contents of book.dat:\n",stdout);
     }
-    printf("%s by %s :$%.2f\n", biblio[count].title, biblio[count].author, biblio[count].price);
+    printf("%s  by:%s  $%.2f\n\n", biblio[count].title, biblio[count].author, biblio[count].price);
     count++;
   }
   /*the filecount is the number of book entries that exist already*/
@@ -50,6 +50,7 @@ int main(void)
     fputs("Price: ",stdout);
     fscanf(stdin, "%f",&biblio[count].price);
     while(getchar() != '\n'); //clean up trailing chars from fscanf
+    putchar('\n');
     count++;
     if(count < MAXBKS)
     {
@@ -60,7 +61,7 @@ int main(void)
   fputs("Here is a list of your books:\n",stdout);
   for(index = 0; index < count; index++)
   {
-    fprintf(stdout,"%s by %s: $%.2f\n",biblio[index].title, biblio[index].author,biblio[index].price);
+    fprintf(stdout,"%s  by:%s  $%.2f\n\n",biblio[index].title, biblio[index].author,biblio[index].price);
   }
 
   /*The following lines append our structs to the file*/
