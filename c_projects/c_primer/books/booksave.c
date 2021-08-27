@@ -5,27 +5,28 @@
 #include "books.h"
 
 int yesno(void);
-int getbooks(struct book *, int);
-int printdat(struct book biblio[MAXBKS], FILE *pbooks);
+int getBooks(struct book *, int);
+int printBooks(struct book biblio[MAXBKS], FILE *pbooks);
+void stringsort(struct book *biblio, int strCount);
 int size = sizeof(struct book);
+char filename[] = "books.dat";
 
 int main(void)
 {
   struct book biblio[MAXBKS]; //array of structs
   int index,count; 
-  int filecount; //the number of entries which relates to the biblio array
+  int filePosition; //the number of entries which relates to the biblio array
   FILE * pbooks;
-  char filename[] = "books.dat";
 
-  if((pbooks = fopen(filename,"a+b")) == NULL)
+  if((pbooks = fopen(filename,"r+b")) == NULL)
   {
     fprintf(stderr,"ERROR: Cant open file %s\n",filename);
     exit(1);
   }
   rewind(pbooks);
 
-  filecount = printdat(biblio, pbooks); //returns number of books and prints the output of the file
-  count = filecount;
+  filePosition = printBooks(biblio, pbooks); // Returns number of entries and prints the output of the file
+  count = filePosition;
 
   if(count == MAXBKS)//if file cannot accept any more entries
   {
@@ -33,29 +34,35 @@ int main(void)
     exit(2);
   }
 
-  count = getbooks(biblio,count); //gets new book entries, returns count
+  count = getBooks(biblio,count); //gets new book entries, returns count
 
-  /*The following lines append our structs to the file*/
+  /* The following lines append our structs to the file
+  writing to our .dat file starting where we left off at the count of
+  currently existing book entries(filePosition). */
   fseek(pbooks, 0L, SEEK_END);
-  /*writing to our .dat file starting where we left off at the count of
-    currently existing book entries(filecount)*/
-  
-  fwrite(&biblio[filecount], size, count - filecount,pbooks);
+  fwrite(&biblio[filePosition], size, count - filePosition,pbooks);
   int yn;  //yn takes the return of yesno() - yes=1, no=0, other=2
   
   do
   {
-    fputs("View books.dat? Y/N: ", stdout);
+    fprintf(stdout,"View %s? Y/N: ", filename);
   }while( (yn = yesno()) == OTHER);
   if(yn == YES) 
   {
     rewind(pbooks);
-    printdat(biblio, pbooks);
+    printBooks(biblio, pbooks);
   }else 
   {
     puts("Goodbye.");
   }
-
+  /****************************************************************************/
+  
+  puts("ordering array, writing to file\n");
+  stringsort(biblio,count);
+  rewind(pbooks);
+  fwrite(&biblio[0],size,count,pbooks);
+  rewind(pbooks);
+  printBooks(biblio,pbooks);
   fclose(pbooks);
 return 0;
 }

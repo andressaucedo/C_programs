@@ -1,34 +1,29 @@
 #include <stdio.h>
 #include "books.h"
-/*
-int sortbooks(struct book *in, FILE *fp)
-{
-    struct book alpha;
-    rewind(fp);
-    
+#include <string.h>
 
-}
-
-/*function loop continues while we can read struct size chunks of data from our
-file where the book entries are stored*/
-int printdat(struct book biblio[MAXBKS], FILE *pbooks)
+/* Function loop continues while we can read struct size chunks of data from our
+file where the book entries are stored. */
+int printBooks (struct book biblio[MAXBKS], FILE *pbooks)
 {
     extern int size;
+    extern char filename[];
+
     int count = 0;
     while (count < MAXBKS && fread(&biblio[count], size, 1, pbooks) == 1)
     {
         if (count == 0)
         {
-            fputs("Current contents of book.dat:\n", stdout);
+            fprintf(stdout,"Current contents of %s:\n", filename);
         }
-        printf("%s  by:%s  $%.2f\n\n", biblio[count].title, biblio[count].author, biblio[count].price);
+        printf("#%d - %s  by:%s  $%.2f\n\n",count, biblio[count].title, biblio[count].author, biblio[count].price);
         count++;
     }
 
     return count;
     }
 
-int getbooks(struct book *biblio, int count)
+int getBooks (struct book *biblio, int count)
 {
     fputs("Please add Entries.\n"
           "[Enter] to stop: \n"
@@ -73,17 +68,17 @@ int yesno(void)
 }
 
 //string sorting function using pointers
-void stringsort(char *strings[], int strCount)
+void stringsort(struct book *biblio, int strCount)
 {
-    char *temp;
+    char temp[MAXWRD];
     int top, seek;
     /*if strcmp(top,seek) returns a positive integer it means that top comes after seek in the machine collating sequence (ASCII) so we swap the two values in the pointer array */
     for (top = 0; top < strCount - 1; top++)
         for (seek = top + 1; seek < strCount; seek++)
-            if (strcmp(strings[top], strings[seek]) > 0)
+            if (strcmp(biblio[top].title, biblio[seek].title) > 0)
             {
-                temp = strings[top];
-                strings[top] = strings[seek];
-                strings[seek] = temp;
+                strcpy(temp, biblio[top].title);
+                strcpy(biblio[top].title, biblio[seek].title);
+                strcpy(biblio[seek].title, temp);
             }
 }
