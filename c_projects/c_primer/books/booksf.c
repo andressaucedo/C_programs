@@ -71,3 +71,19 @@ int yesno(void)
     }else
         return OTHER;
 }
+
+//string sorting function using pointers
+void stringsort(char *strings[], int strCount)
+{
+    char *temp;
+    int top, seek;
+    /*if strcmp(top,seek) returns a positive integer it means that top comes after seek in the machine collating sequence (ASCII) so we swap the two values in the pointer array */
+    for (top = 0; top < strCount - 1; top++)
+        for (seek = top + 1; seek < strCount; seek++)
+            if (strcmp(strings[top], strings[seek]) > 0)
+            {
+                temp = strings[top];
+                strings[top] = strings[seek];
+                strings[seek] = temp;
+            }
+}
