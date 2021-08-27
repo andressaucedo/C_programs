@@ -63,11 +63,11 @@ int yesno(void)
     sscanf(yesno, "%c", &yn);
     if (yn == 'y' || yn == 'Y')
     {
-        return 1;
+        return YES;
     }
     else if (yn == 'n' || yn == 'N')
     {
-        return 0;
+        return NO;
     }else
-        return 2;
+        return OTHER;
 }
