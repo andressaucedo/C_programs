@@ -1,0 +1,9 @@
+Tue Sep  7 17:26:56 2021
+280.00 + Joann
+400.00 + Harry
+140.00 + Rob Santos
+80.00 + Reagan
+140.00 + Mel
+
+Item total: 1040.00
+
