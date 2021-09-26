@@ -1,5 +1,9 @@
-#include<stdio.h>
+/* dectobin.c -- turns base 10 integers into binary representations*/
+#include <string.h>
+#include <stdio.h>
 #define HI 12
+#define INPUTSIZE 40
+
 //HI should be set to multiples of 4
 void calc(int input, int values[], int binary[]);
 int maxinput(int values[]);
@@ -8,40 +12,62 @@ int main()
 {
 int values[HI]; //array holding the decimal values of each binary place
 int binary[HI]; //the array that outputs as the actual binary number
-int i,k,input,m;
+char inputString[INPUTSIZE];
+char quit[] = {"quit\n"}; //include newline at the end for fgets()
+int i,k,input,m,scan;
 k=1; //variable for leftmost value
    for(i=HI-1; i >= 0; i--){ //set the values and initialize binary array
       values[i]=k;
       binary[i]=0;
       k=k*2;
    }
+   puts("Type 'quit' to end.");
+   while(1)
+   {
+       printf("Enter integer to convert:\n");
+       fgets(inputString,sizeof(inputString),stdin);
+       if(strcmp(inputString, quit) == 0)
+       {
+           break;
+       }
+       if((scan = sscanf(inputString,"%d",&input)) == EOF)
+       {
+           break;
+       }
+       else if(scan != 1 || input < 0)
+       {
+           puts("Error: incorrect input type. Enter an integer.");
+           continue;
+       }
 
-   while(input != EOF){
       for(i=0;i<HI;i++) // resets binary array for next input
          binary[i]=0;
-      printf("Enter integer to convert:\n");
-      scanf("%d",&input);
-      if(input > (m = maxinput(values))){ //if input exceeds max value
+      if(input > (m = maxinput(values)))
+      { //if input exceeds max value
          printf("Error: input value exceeds max of %d\n", m);
          input = 0;
       }
       calc(input,values,binary);
 
-      for(i=0; i < HI ; i++){
+      for(i=0; i < HI ; i++)
+      {
          if(i%4 == 0){
             printf("  ");
          }
          printf("%5d ", values[i]);
       }
       putchar('\n');
-      for(i=0; i < HI ; i++){
-         if(i%4 == 0){
+
+      for(i=0; i < HI ; i++)
+      {
+         if(i%4 == 0)
+         {
             printf("  ");
          }
          printf("%5d ", binary[i]);
       }
       putchar('\n');
-      }
+   }
 return 0;
 }
 
@@ -69,10 +95,10 @@ int maxinput(int values[])
 int i, max;
 max = 0;
 
-   for(i= HI;i >= 0; i--){
+   for(i= HI;i >= 0; i--)
+   {
       max += values[i];
    }
-++max;
 
 return max;
 }
